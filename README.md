@@ -5,3 +5,6 @@ base de datos en mySQL.
 la app se corresponde con la arquitectura MVC.
 la app solicita al usuario que cargue sus datos de usuario y contraseña, luego esos datos se usaran para ingresar a las planillas. 
 dentro de la app puede cargar pacientes, sus datos personales y datos clinicos. y tambien solicitar la busqueda de datos concretos.
+
+
+enlace a video de funcionalidad de la app: https://youtu.be/-UErqUUfzFE
