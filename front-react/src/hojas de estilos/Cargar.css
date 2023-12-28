@@ -1,0 +1,6 @@
+.boton_cargar, .seccion_buscar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
