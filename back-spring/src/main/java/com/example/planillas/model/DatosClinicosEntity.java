@@ -1,9 +1,8 @@
-/*
 package com.example.planillas.model;
 
 import jakarta.persistence.*;
 
-@Entity (name = "datosClinicos")
+@Entity (name = "datos_clinicos")
 public class DatosClinicosEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -21,10 +20,12 @@ public class DatosClinicosEntity {
     private boolean insomio;
     private boolean estres;
     private String otrosEstilosVida;
+    private String diagnostico;
 
-    @OneToOne
+
+/*  @OneToOne
     @JoinColumn(name = "paciente_id")
-    private PacientEntity paciente;
+    private PacientEntity paciente;*/
 
     public Long getId() {
         return id;
@@ -130,13 +131,20 @@ public class DatosClinicosEntity {
         this.otrosEstilosVida = otrosEstilosVida;
     }
 
-    public PacientEntity getPaciente() {
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    /*public PacientEntity getPaciente() {
         return paciente;
     }
 
     public void setPaciente(PacientEntity paciente) {
         this.paciente = paciente;
-    }
+    }*/
 }
 
-*/

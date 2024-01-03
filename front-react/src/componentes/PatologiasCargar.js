@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Checkbox, FormControlLabel, InputAdornment, TextField } from "@mui/material"
 import '../hojas de estilos/Cargar.css';
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const CargarPatologias = () => {
@@ -47,6 +49,37 @@ const handleCheckboxChange = (event, fieldName) => {
     diagnostico: ''
   });
 
+  const navigate = useNavigate();
+  const handleFormSubmit = async () => {
+
+    if (!formData.diagnostico) {
+      toast.error("COMPLETE LOS CAMPOS OBLIGATORIOS", { autoClose: 1300 });
+      return;
+    }
+
+    try {
+      console.log(formData);
+      const response = await fetch('http://localhost:8080/api/users/cargarDatosClinicos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        toast.success("datos cargados con exito", { autoClose: 1300 });
+        setTimeout(() => {
+          navigate('/componentes/PaginaUsuario');
+        }, 2200); 
+      } else {
+        toast.error("Error de carga de datos", { autoClose: 1300 });
+      }
+    } catch (error) {
+      toast.error("error al enviar formulario", error, { autoClose: 1300 });
+    }
+  }
+
   return(
     <div className="contenedor">
       <div className='patologias'>
@@ -90,6 +123,7 @@ const handleCheckboxChange = (event, fieldName) => {
             label="especifique"
             type='text'
             id="outlined-start-adornment"
+            variant="standard"
             value={formData.otrasPatologias}
             onChange={(e) => handleInputChange(e, 'otrasPatologias')}
             sx={{ m: 1, width: '25ch', height: '25px'}}
@@ -140,6 +174,7 @@ const handleCheckboxChange = (event, fieldName) => {
           label="especifique"
           type='text'
           id="outlined-start-adornment"
+          variant="standard"
           value={formData.otrosEstilosVida}
           onChange={(e) => handleInputChange(e, 'otrosEstilosVida')}
           sx={{ m: 1, width: '25ch', height: '25px'}}
@@ -150,8 +185,9 @@ const handleCheckboxChange = (event, fieldName) => {
         <div className="diagnostico">
           <TextField
             id="outlined-multiline-static"
-            label="Diagnostico"
+            label="Diagnostico (obligatorio)"
             type='text'
+            required
             multiline
             value={formData.diagnostico}
             onChange={(e) => handleInputChange(e, 'diagnostico')}
@@ -168,7 +204,7 @@ const handleCheckboxChange = (event, fieldName) => {
             <Button 
               sx={{ m: 1, width: '25ch'}}
               variant="contained"
-              // onClick={handleFormSubmit}
+              onClick={handleFormSubmit}
             >
               Cargar datos
             </Button>  

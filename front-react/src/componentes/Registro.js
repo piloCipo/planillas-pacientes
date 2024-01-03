@@ -33,12 +33,12 @@ const DarseDeAlta = () => {
   const handleRegistrarmeClick = async () => {
 
     if (!usuario || !contrasena || !confirmarContrasena) {
-      toast.error("COMPLETE TODOS LOS CAMPOS");
+      toast.error("COMPLETE TODOS LOS CAMPOS", { autoClose: 1300 });
       return;
     }
 
     if (contrasena !== confirmarContrasena) {
-      toast.error("CONTRASEÑAS NO COINCIDEN");
+      toast.error("CONTRASEÑAS NO COINCIDEN", { autoClose: 1300 });
       return;
     }
 
@@ -47,10 +47,10 @@ const DarseDeAlta = () => {
         usuario: usuario,
         password: contrasena,
       });
-      toast.success(`Usuario '${usuario}' creado exitosamente`);  
+      toast.success(`Usuario '${usuario}' creado exitosamente`, { autoClose: 1300 });  
       navigate( '/');
     } catch (error) {
-      toast.error("Error al crear usuario");
+      toast.error("Error al crear usuario", { autoClose: 1300 });
     }
   };
 

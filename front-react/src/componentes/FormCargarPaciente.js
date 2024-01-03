@@ -5,8 +5,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState, useEffect } from 'react';
 import '../hojas de estilos/Cargar.css';
-import { Checkbox, FormControl, FormControlLabel, FormHelperText, MenuItem, OutlinedInput } from '@mui/material';
+import { MenuItem } from '@mui/material';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function CargarPaciente() {
@@ -31,6 +32,7 @@ export default function CargarPaciente() {
     fechaIngreso: ''
   })
 
+  const navigate = useNavigate();
   const handleFormSubmit = async () => {
 
     if (!formData.dni || !formData.nombre || !formData.apellido || !formData.fechaNacimiento || !formData.fechaIngreso || !formData.obraSocial) {
@@ -51,7 +53,7 @@ export default function CargarPaciente() {
       if (response.ok) {
         toast.success("paciente cargado con exito", { autoClose: 1300 });
         setTimeout(() => {
-          window.location.reload();
+          navigate('/componentes/PatologiasCargar');
         }, 2200); 
       } else {
         toast.error("Error de autenticacion", { autoClose: 1300 });

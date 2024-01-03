@@ -12,16 +12,17 @@ import CargarPatologias from './componentes/PatologiasCargar';
 function App() {
   return (
     <div className="App">
-      <CargarPatologias></CargarPatologias>
+      {/* <CargarPatologias></CargarPatologias> */}
       <Router>
-        {/* <Routes>
+        <Routes>
           
           <Route path='/' element={<Ingresar />} />
           <Route path='/componentes/Registro' element={<DarseDeAlta />} />
           <Route path='/componentes/PaginaUsuario' element={<ResponsiveAppBar />} />
           <Route path='/componentes/FormCargarPaciente' element={<> <CargarPaciente /> <ResponsiveAppBar /> </>} />
           <Route path='/componentes/FormBuscarPaciente' element={<> <BuscarPaciente /> <ResponsiveAppBar /> </>} />
-        </Routes> */}
+          <Route path='/componentes/PatologiasCargar' element={<> <CargarPatologias /> <ResponsiveAppBar /> </>} />
+        </Routes>
       </Router>
       <ToastContainer position='top-center'></ToastContainer>
 

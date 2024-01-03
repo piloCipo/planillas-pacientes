@@ -39,14 +39,14 @@ const Ingresar = () => {
         toast.success(`BIENVENIDO ${usuario.toUpperCase()}`)
         navigate('./componentes/PaginaUsuario');
       } else if (response.status === 401) {
-        toast.error("Datos incorrectos");
+        toast.error("Datos incorrectos", { autoClose: 1300 });
       } else {
-        toast.error("Error de autenticacion");
+        toast.error("Error de autenticacion", { autoClose: 1300 });
       }
     
     
     } catch (error) {
-      toast.error("back no esta iniciado", error);
+      toast.error("back no esta iniciado", error, { autoClose: 1300 });
     }
   }
 
@@ -99,9 +99,6 @@ const Ingresar = () => {
 						<Link
 							component="button"
 							variant="body2"
-							onClick={() => {
-								console.info("I'm a button.");
-							}}
 						>
 							olvidaste tus datos?
 						</Link>
@@ -111,9 +108,6 @@ const Ingresar = () => {
 							to='./componentes/Registro'
 							component="button"
 							variant="body2"
-							onClick={() => {
-								console.info("I'm a button.");
-							}}
 						>
 							no tienes cuenta? Registrate.
 						</Link>
