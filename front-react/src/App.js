@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DarseDeAlta from './componentes/Registro';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CargarPatologias from './componentes/PatologiasCargar';
+import CargarSignos from './componentes/SignosCargar';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           <Route path='/componentes/FormCargarPaciente' element={<> <CargarPaciente /> <ResponsiveAppBar /> </>} />
           <Route path='/componentes/FormBuscarPaciente' element={<> <BuscarPaciente /> <ResponsiveAppBar /> </>} />
           <Route path='/componentes/PatologiasCargar' element={<> <CargarPatologias /> <ResponsiveAppBar /> </>} />
-        </Routes>
+          <Route path='/componentes/SignosCargar' element={<> <CargarSignos /> <ResponsiveAppBar /> </>} />
+        </Routes> 
       </Router>
       <ToastContainer position='top-center'></ToastContainer>
 

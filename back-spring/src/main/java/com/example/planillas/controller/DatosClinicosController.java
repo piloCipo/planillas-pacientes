@@ -2,6 +2,7 @@ package com.example.planillas.controller;
 
 import com.example.planillas.model.DatosClinicosEntity;
 import com.example.planillas.service.DatosClinicosService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

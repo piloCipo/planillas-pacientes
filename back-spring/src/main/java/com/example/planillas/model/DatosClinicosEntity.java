@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 public class DatosClinicosEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idDatosClinicos;
+
+    private Long idPaciente;
 
     private boolean hipertension;
     private boolean insuficienciaCardiaca;
@@ -23,16 +25,12 @@ public class DatosClinicosEntity {
     private String diagnostico;
 
 
-/*  @OneToOne
-    @JoinColumn(name = "paciente_id")
-    private PacientEntity paciente;*/
-
     public Long getId() {
-        return id;
+        return idDatosClinicos;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idDatosClinicos = idDatosClinicos;
     }
 
     public boolean isHipertension() {
@@ -139,12 +137,12 @@ public class DatosClinicosEntity {
         this.diagnostico = diagnostico;
     }
 
-    /*public PacientEntity getPaciente() {
-        return paciente;
+    public Long getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setPaciente(PacientEntity paciente) {
-        this.paciente = paciente;
-    }*/
+    public void setIdPaciente(Long idPaciente) {
+        this.idPaciente = idPaciente;
+    }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Checkbox, FormControlLabel, InputAdornment, TextField } from "@mui/material"
 import '../hojas de estilos/Cargar.css';
 import { toast } from "react-toastify";
@@ -33,32 +33,17 @@ const handleCheckboxChange = (event, fieldName) => {
     }));
   };
 
-  const [formData, setFormData] = useState({
-    hipertension: false,
-    insuficienciaCardiaca: false,
-    diabetes: false,
-    asma: false,
-    oncologicos: false,
-    otrasPatologias: '',
-    alcohol: false,
-    tabaco: false,
-    sedentarismo: false,
-    insomio: false,
-    estres: false,
-    otrosEstilosVida: '',
-    diagnostico: ''
-  });
-
   const navigate = useNavigate();
   const handleFormSubmit = async () => {
-
+    formData.idPaciente = parseInt(numeroHistoriaClinica);
+    console.log(formData)
     if (!formData.diagnostico) {
       toast.error("COMPLETE LOS CAMPOS OBLIGATORIOS", { autoClose: 1300 });
       return;
     }
 
     try {
-      console.log(formData);
+      
       const response = await fetch('http://localhost:8080/api/users/cargarDatosClinicos', {
         method: 'POST',
         headers: {
@@ -79,6 +64,41 @@ const handleCheckboxChange = (event, fieldName) => {
       toast.error("error al enviar formulario", error, { autoClose: 1300 });
     }
   }
+
+  const [numeroHistoriaClinica, setNumeroHistoriaClinica] = useState(0);
+
+  useEffect(() => {
+    const obtenerUltimoId = async () => {
+      try {
+        const respuesta = await fetch('http://localhost:8080/api/users/ultimo-id');
+        const ultimoId = await respuesta.json();
+        const nuevoId = parseInt(ultimoId);
+        setNumeroHistoriaClinica(nuevoId);
+      } catch (error) {
+        console.error('Error al obtener y actualizar el ID:', error);
+      }
+    };
+
+    obtenerUltimoId();
+  }, []);
+
+
+  const [formData, setFormData] = useState({
+    idPaciente: null,
+    hipertension: false,
+    insuficienciaCardiaca: false,
+    diabetes: false,
+    asma: false,
+    oncologicos: false,
+    otrasPatologias: '',
+    alcohol: false,
+    tabaco: false,
+    sedentarismo: false,
+    insomio: false,
+    estres: false,
+    otrosEstilosVida: '',
+    diagnostico: ''
+  });
 
   return(
     <div className="contenedor">

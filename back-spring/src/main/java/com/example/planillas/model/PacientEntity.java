@@ -28,9 +28,6 @@ public class PacientEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaIngreso;
 
-    /*@OneToOne(mappedBy = "paciente")
-    private DatosClinicosEntity datosClinicosEntity;*/
-
     public Long getId() {
         return id;
     }
@@ -110,13 +107,6 @@ public class PacientEntity {
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
     }
-
-  /*  public DatosClinicosEntity getDatosClinicos() {
-        return datosClinicosEntity;
-    }
-    public void setDatosClinicos(DatosClinicosEntity datosClinicosEntity) {
-        this.datosClinicosEntity = datosClinicosEntity;
-    }*/
 
 }
 
