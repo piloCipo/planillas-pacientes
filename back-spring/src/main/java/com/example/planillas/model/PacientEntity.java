@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 @Entity (name = "pacientes")
 public class PacientEntity {
-
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;

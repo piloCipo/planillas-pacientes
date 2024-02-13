@@ -23,7 +23,7 @@ function App() {
           <Route path='/componentes/FormCargarPaciente' element={<> <CargarPaciente /> <ResponsiveAppBar /> </>} />
           <Route path='/componentes/FormBuscarPaciente' element={<> <BuscarPaciente /> <ResponsiveAppBar /> </>} />
           <Route path='/componentes/PatologiasCargar' element={<> <CargarPatologias /> <ResponsiveAppBar /> </>} />
-          <Route path='/componentes/SignosCargar' element={<> <CargarSignos /> <ResponsiveAppBar /> </>} />
+          <Route path='/componentes/SignosCargar/:numeroDeHistoriaClinica' element={<> <CargarSignos /> <ResponsiveAppBar /> </>} />
         </Routes> 
       </Router>
       <ToastContainer position='top-center'></ToastContainer>

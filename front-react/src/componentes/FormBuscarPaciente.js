@@ -89,6 +89,29 @@ export default function BuscarPaciente() {
     }
   };
 
+  const [mostrarHistorial, setMostrarHistorial] = useState(false);
+  const handleSearch = async () => {
+    setMostrarHistorial(true);
+    try {
+      const response = await fetch(`http://localhost:8080/api/users/paciente/${parseInt(data.id)}`,{
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+
+      if(response.ok) {
+        const historialSignos = await response.json();
+        console.log(historialSignos);
+      } else {
+        toast.warning('no se encontraron datos');
+      }
+    } catch (error) {
+      toast.error('error al traer signos');
+    }
+  }
+  
   function CalcularEdad({ fechaNacimiento }) {
     const fechaNacimientoObj = new Date(fechaNacimiento);
     const fechaActual = new Date();
@@ -105,9 +128,12 @@ export default function BuscarPaciente() {
 
   const navigate = useNavigate();
   const handleCargarSignos = () => {
-    navigate('/componentes/SignosCargar')
+    const numeroDeHistoriaClinica = data.id;
+    navigate(`/componentes/SignosCargar/${numeroDeHistoriaClinica}`)
   } 
  
+  
+   
     return (
       <Box >
         <div className='container'>
@@ -143,57 +169,89 @@ export default function BuscarPaciente() {
               variant="contained">buscar paciente</Button>
           </div>
           
-            <div className="seccion_datos">
-            {datosPaciente && (
-              <>
-                <TextField
-                  label="informacion"
-                  id="filled-read-only-input"
-                  multiline
-                  rows={5}
-                  value={`
-                paciente ${datosPaciente.paciente.nombre.toUpperCase()} ${datosPaciente.paciente.apellido.toUpperCase()} 
-                ${edadActual !== null ? `de ${edadActual} años` : ''}
-                diagnostico: "${datosPaciente.datosClinicos.diagnostico}", con fecha de ingreso el ${datosPaciente.paciente.fechaIngreso}`}
-                  sx={{ m: 1, width: '120ch' }}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start"></InputAdornment>,
-                    readOnly: true,
-                  }}
-                  variant="filled"
-                /><br />
 
-                <TextField
-                  label="datos clinicos y habitos"
-                  id="filled-read-only-input"
-                  value={`
-                PATOLOGIAS PREVIAS: ${(datosPaciente.datosClinicos.asma) ? "asma - " : ''} ${(datosPaciente.datosClinicos.diabetes) ? "diabetes - " : ''} ${(datosPaciente.datosClinicos.hipertension) ? "hipertension - " : ''} ${(datosPaciente.datosClinicos.insuficienciaCardiaca) ? "insuficiencia cardiaca - " : ''} ${(datosPaciente.datosClinicos.oncologicos) ? "oncologicos - " : ''} ${(datosPaciente.datosClinicos.otrasPatologias) ? datosPaciente.datosClinicos.otrasPatologias + ' -' : ''}
-                HABITOS: ${(datosPaciente.datosClinicos.alcohol) ? "alcohol - " : ''} ${(datosPaciente.datosClinicos.estres) ? "estrés - " : ''} ${(datosPaciente.datosClinicos.insomio) ? "insomio - " : ''} ${(datosPaciente.datosClinicos.sedentarismo) ? "sedentarismo - " : ''} ${(datosPaciente.datosClinicos.tabaco) ? "tabaco - " : ''} ${(datosPaciente.datosClinicos.otrosEstilosVida) ? datosPaciente.datosClinicos.otrosEstilosVida + ' -' : ''}
-                `}
-                  multiline
-                  rows={4}
-                  sx={{ m: 1, width: '120ch' }}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start"></InputAdornment>,
-                    readOnly: true,
-                  }}
-                  variant="filled"
-                />
-                <div className='acciones'>
-              <Button 
-                sx={{ m: 2, width: '25ch'}}
-                onClick={handleCargarSignos}
-                variant="contained">cargar signos
-              </Button>
-              <Button 
-                sx={{ m: 2, width: '25ch'}}
-                onClick={handleDeletePatient}
-                variant="contained">eliminar paciente
-              </Button>
+          {!mostrarHistorial && (
+            <div className="seccion_datos">
+              {datosPaciente && (
+                <>
+                  <TextField
+                    label="informacion"
+                    id="filled-read-only-input"
+                    multiline
+                    rows={5}
+                    value={`
+                  paciente ${datosPaciente.paciente.nombre.toUpperCase()} ${datosPaciente.paciente.apellido.toUpperCase()} 
+                  ${edadActual !== null ? `de ${edadActual} años` : ''}
+                  diagnostico: "${datosPaciente.datosClinicos.diagnostico}", con fecha de ingreso el ${datosPaciente.paciente.fechaIngreso}`}
+                    sx={{ m: 1, width: '120ch' }}
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start"></InputAdornment>,
+                      readOnly: true,
+                    }}
+                    variant="filled"
+                  /><br />
+
+                  <TextField
+                    label="datos clinicos y habitos"
+                    id="filled-read-only-input"
+                    value={`
+                      PATOLOGIAS PREVIAS: ${(datosPaciente.datosClinicos.asma) ? "asma - " : ''} ${(datosPaciente.datosClinicos.diabetes) ? "diabetes - " : ''} ${(datosPaciente.datosClinicos.hipertension) ? "hipertension - " : ''} ${(datosPaciente.datosClinicos.insuficienciaCardiaca) ? "insuficiencia cardiaca - " : ''} ${(datosPaciente.datosClinicos.oncologicos) ? "oncologicos - " : ''} ${(datosPaciente.datosClinicos.otrasPatologias) ? datosPaciente.datosClinicos.otrasPatologias + ' -' : ''}
+                      HABITOS: ${(datosPaciente.datosClinicos.alcohol) ? "alcohol - " : ''} ${(datosPaciente.datosClinicos.estres) ? "estrés - " : ''} ${(datosPaciente.datosClinicos.insomio) ? "insomio - " : ''} ${(datosPaciente.datosClinicos.sedentarismo) ? "sedentarismo - " : ''} ${(datosPaciente.datosClinicos.tabaco) ? "tabaco - " : ''} ${(datosPaciente.datosClinicos.otrosEstilosVida) ? datosPaciente.datosClinicos.otrosEstilosVida + ' -' : ''}
+                      `}
+                    multiline
+                    rows={4}
+                    sx={{ m: 1, width: '120ch' }}
+                    InputProps={{
+                      startAdornment: <InputAdornment position="start"></InputAdornment>,
+                      readOnly: true,
+                    }}
+                    variant="filled"
+                  />
+                  <div className='acciones'>
+                    <Button 
+                      sx={{ m: 2, width: '25ch'}}
+                      onClick={handleCargarSignos}
+                      variant="contained">cargar signos
+                    </Button>
+                    <Button 
+                      sx={{ m: 2, width: '25ch'}}
+                      onClick={handleSearch}
+                      variant="contained">ver historial
+                    </Button>
+                    <Button 
+                      sx={{ m: 2, width: '25ch'}}
+                      onClick={handleDeletePatient}
+                      variant="contained">eliminar paciente
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
-              </>
-            )}
-          </div>
+          )}  
+
+                    
+          {mostrarHistorial && (
+            <div className="seccion_historial">
+              {<div className='acciones'>
+                    <Button 
+                      sx={{ m: 2, width: '25ch'}}
+                      onClick={handleCargarSignos}
+                      variant="contained">cargar signos
+                    </Button>
+                    <Button 
+                      sx={{ m: 2, width: '25ch'}}
+                      onClick={handleSearch}
+                      variant="contained">ver historial
+                    </Button>
+                    <Button 
+                      sx={{ m: 2, width: '25ch'}}
+                      onClick={handleDeletePatient}
+                      variant="contained">eliminar paciente
+                    </Button>
+                  </div>}
+            </div>
+          )}
+
         </div>
       </Box>
     );

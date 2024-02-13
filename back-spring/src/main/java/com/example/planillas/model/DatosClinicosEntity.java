@@ -7,9 +7,7 @@ public class DatosClinicosEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long idDatosClinicos;
-
     private Long idPaciente;
-
     private boolean hipertension;
     private boolean insuficienciaCardiaca;
     private boolean diabetes;
