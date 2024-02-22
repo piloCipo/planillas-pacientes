@@ -39,7 +39,7 @@ const Ingresar = () => {
         toast.success(`BIENVENIDO ${usuario.toUpperCase()}`)
         navigate('./componentes/PaginaUsuario');
       } else if (response.status === 401) {
-        toast.error("Datos incorrectos", { autoClose: 1300 });
+        toast.error("Usuario o contraseña incorrectos", { autoClose: 1300 });
       } else {
         toast.error("Error de autenticacion", { autoClose: 1300 });
       }

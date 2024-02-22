@@ -69,9 +69,6 @@ export default function CargarSignos() {
 
       if (response.ok) {
         toast.success("datos cargados con exito", { autoClose: 1300 });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2200); 
       } else {
         toast.error("Error de carga de datos", { autoClose: 1300 });
       }

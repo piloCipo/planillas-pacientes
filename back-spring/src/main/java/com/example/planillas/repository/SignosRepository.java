@@ -8,5 +8,5 @@ import java.util.List;
 
 
 public interface SignosRepository extends JpaRepository<SignosEntity, Long> {
-    List<SignosEntity> findByIdPaciente(Long idPaciente);
+    List<SignosEntity> findByPacientId(Long pacientId);
 }

@@ -42,7 +42,7 @@ public class PacientServiceImp implements PacientService {
         Map<String, Object> result = new HashMap<>();
 
         PacientEntity pacient = pacientRepository.findById(id).orElse(null);
-        DatosClinicosEntity datosClinicos = (DatosClinicosEntity) datosClinicosRepository.findByIdPaciente(id).orElse(null);
+        DatosClinicosEntity datosClinicos = (DatosClinicosEntity) datosClinicosRepository.findByPacientId(id).orElse(null);
 
         if (pacient != null && datosClinicos != null) {
             result.put("paciente", pacient);

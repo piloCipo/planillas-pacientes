@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface DatosClinicosRepository extends JpaRepository <DatosClinicosEntity, Long> {
-    Optional<Object> findByIdPaciente(Long id);
+    Optional<Object> findByPacientId(Long idPaciente);
 
-    void deleteByIdPaciente(Long id);
+    void deleteByPacientId(Long idPaciente);
 }

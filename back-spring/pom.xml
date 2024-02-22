@@ -14,7 +14,7 @@
 	<name>planillas pacientes </name>
 	<description>Carga y busqueda de pacientes</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -51,8 +51,13 @@
             <artifactId>javax.annotation-api</artifactId>
             <version>1.2</version>
         </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>

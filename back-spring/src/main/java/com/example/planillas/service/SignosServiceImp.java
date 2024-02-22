@@ -21,6 +21,6 @@ public class SignosServiceImp implements SignosService {
 
     @Override
     public List<SignosEntity> obtenerSignosPorId(Long idPaciente) {
-        return signosRepository.findByIdPaciente(idPaciente);
+        return signosRepository.findByPacientId(idPaciente);
     }
 }
